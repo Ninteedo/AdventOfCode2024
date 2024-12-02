@@ -50,28 +50,3 @@ object Point2D {
 
   def yVec(y: Int): Point2D = new Point2D(0, y)
 }
-
-enum Direction {
-  case North, East, South, West
-
-  def adjustPosition(pos: Point2D): Point2D = this match {
-    case North => Point2D(pos.x, pos.y - 1)
-    case East => Point2D(pos.x + 1, pos.y)
-    case South => Point2D(pos.x, pos.y + 1)
-    case West => Point2D(pos.x - 1, pos.y)
-  }
-
-  def opposite: Direction = this match {
-    case North => South
-    case East => West
-    case South => North
-    case West => East
-  }
-
-  def toPoint: Point2D = this match {
-    case North => Point2D(0, -1)
-    case East => Point2D(1, 0)
-    case South => Point2D(0, 1)
-    case West => Point2D(-1, 0)
-  }
-}
