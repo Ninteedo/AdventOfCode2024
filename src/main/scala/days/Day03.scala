@@ -21,9 +21,9 @@ class Day03 extends IDay {
     matches.foldLeft((false, 0)) { case ((isDisabled, sum), m) =>
       (isDisabled, m.group(0)) match {
         case (_, "do()")    => (false, sum)
-        case (_, "don't()") => (true, sum)
+        case (_, "don't()") => (true,  sum)
+        case (true, _)      => (true,  sum)
         case (false, _)     => (false, sum + mul(m))
-        case _              => (isDisabled, sum)
       }
     }._2
   }
