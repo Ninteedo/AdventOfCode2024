@@ -5,11 +5,11 @@ class DayTemplate extends IDay {
     (part1(), part2())
   }
 
-  def part1() = {
+  private def part1() = {
     incomplete
   }
 
-  def part2() = {
+  private def part2() = {
     incomplete
   }
 }

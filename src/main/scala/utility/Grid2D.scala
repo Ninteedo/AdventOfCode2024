@@ -19,6 +19,8 @@ class Grid2D[T: ClassTag](val entries: Array[Array[T]]) {
   def adjacent(row1: Int, col1: Int, row2: Int, col2: Int): Boolean =
     contains(row1, col1) && contains(row2, col2) && (row1 != row2 || col1 != col2) && (row1 - row2).abs <= 1 && (col1 - col2).abs <= 1
   def adjacent(pos1: Point2D, pos2: Point2D): Boolean = adjacent(pos1.y, pos1.x, pos2.y, pos2.x)
+  
+  def indices: List[Point2D] = entries.indices.flatMap(rowNum => entries(rowNum).indices.map(colNum => Point2D(colNum, rowNum))).toList
 
   def indexWhere(f: T => Boolean): Option[Point2D] = {
     entries.zipWithIndex.find { case (row, rowNum) => row.indexWhere(f) >= 0 } match {
