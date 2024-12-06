@@ -18,4 +18,11 @@ enum Direction {
     case South => Point2D(0, 1)
     case West => Point2D(-1, 0)
   }
+  
+  def rotateClockwise: Direction = this match {
+    case North => East
+    case East => South
+    case South => West
+    case West => North
+  }
 }
