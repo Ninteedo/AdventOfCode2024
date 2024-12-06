@@ -8,6 +8,10 @@ class Grid2D[T: ClassTag](val entries: Array[Array[T]]) {
 
   def at(row: Int, col: Int): T = entries(row)(col)
   def at(pos: Point2D): T = at(pos.y, pos.x)
+  
+  def atOption(row: Int, col: Int): Option[T] = if (contains(row, col)) Some(at(row, col)) else None
+  def atOption(pos: Point2D): Option[T] = atOption(pos.y, pos.x)
+  
   def getRow(row: Int): Array[T] = entries(row)
   def getCol(col: Int): Array[T] = entries.map(_(col))
 
