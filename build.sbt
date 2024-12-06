@@ -6,3 +6,6 @@ lazy val root = (project in file("."))
   .settings(
     name := "AdventOfCode2024"
   )
+
+libraryDependencies +=
+  "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4"
