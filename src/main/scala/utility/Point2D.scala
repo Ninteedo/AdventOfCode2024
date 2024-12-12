@@ -7,6 +7,8 @@ case class Point2D(x: Int, y: Int) {
 
   def -(other: Point2D) = new Point2D(x - other.x, y - other.y)
 
+  def -(direction: Direction): Point2D = this - direction.toPoint
+
   def *(other: Point2D) = new Point2D(x * other.x, y * other.y)
 
   def *(factor: Int) = new Point2D(x * factor, y * factor)
