@@ -8,10 +8,10 @@ class Grid2D[T: ClassTag](val entries: Array[Array[T]]) {
 
   def at(row: Int, col: Int): T = entries(row)(col)
   def at(pos: Point2D): T = at(pos.y, pos.x)
-  
+
   def atOption(row: Int, col: Int): Option[T] = if (contains(row, col)) Some(at(row, col)) else None
   def atOption(pos: Point2D): Option[T] = atOption(pos.y, pos.x)
-  
+
   def getRow(row: Int): Array[T] = entries(row)
   def getCol(col: Int): Array[T] = entries.map(_(col))
 
@@ -23,7 +23,7 @@ class Grid2D[T: ClassTag](val entries: Array[Array[T]]) {
   def adjacent(row1: Int, col1: Int, row2: Int, col2: Int): Boolean =
     contains(row1, col1) && contains(row2, col2) && (row1 != row2 || col1 != col2) && (row1 - row2).abs <= 1 && (col1 - col2).abs <= 1
   def adjacent(pos1: Point2D, pos2: Point2D): Boolean = adjacent(pos1.y, pos1.x, pos2.y, pos2.x)
-  
+
   def indices: List[Point2D] = entries.indices.flatMap(rowNum => entries(rowNum).indices.map(colNum => Point2D(colNum, rowNum))).toList
 
   def indexWhere(f: T => Boolean): Option[Point2D] = {
@@ -60,6 +60,12 @@ class Grid2D[T: ClassTag](val entries: Array[Array[T]]) {
   override def toString: String = entries.map(_.mkString("[", ", ", "]")).mkString("\n")
 
   def toGridString(f: T => String): String = entries.map(_.map(f).mkString("")).mkString("\n")
+
+  def toGridStringByIndex(f: Point2D => String): String = entries.zipWithIndex.map {
+    case (row, rowNum) => row.zipWithIndex.map {
+      case (col, colNum) => f(Point2D(colNum, rowNum))
+    }.mkString("")
+  }.mkString("\n")
 }
 
 object Grid2D {
